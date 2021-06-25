@@ -76,6 +76,93 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B114A16726860E510008C42B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				B114A16826860E570008C42B /* Pokedex */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		B114A16826860E570008C42B /* Pokedex */ = {
+			isa = PBXGroup;
+			children = (
+				B114A16B26860E7F0008C42B /* Data */,
+				B114A16A26860E700008C42B /* Presentation */,
+				B114A16926860E620008C42B /* Domain */,
+			);
+			path = Pokedex;
+			sourceTree = "<group>";
+		};
+		B114A16926860E620008C42B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B114A16E26860F4D0008C42B /* Interfaces */,
+				B114A16D26860F380008C42B /* UseCases */,
+				B114A16C26860F300008C42B /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		B114A16A26860E700008C42B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B114A17026860FA70008C42B /* View */,
+				B114A16F26860FA00008C42B /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B114A16B26860E7F0008C42B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B114A17126860FD40008C42B /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B114A16C26860F300008C42B /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		B114A16D26860F380008C42B /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		B114A16E26860F4D0008C42B /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		B114A16F26860FA00008C42B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B114A17026860FA70008C42B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B114A17126860FD40008C42B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		B1F735A5268607BD008AA8C6 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +186,7 @@
 		B1F735B0268607BD008AA8C6 /* pokedex */ = {
 			isa = PBXGroup;
 			children = (
+				B114A16726860E510008C42B /* Scenes */,
 				B1F735B1268607BD008AA8C6 /* AppDelegate.swift */,
 				B1F735B3268607BD008AA8C6 /* SceneDelegate.swift */,
 				B1F735B5268607BD008AA8C6 /* ViewController.swift */,
