@@ -1,8 +1,23 @@
-//
-//  PokedexViewModel.swift
-//  pokedex
-//
-//  Created by Gabriel Fontes on 25/06/21.
-//
+protocol PokedexViewModeling {
+    func numberOfItemsInSection() -> Int
+    func cellForItemAt()
+    func didSelectCellAt(_ index: Int)
+}
 
-import Foundation
+final class PokedexViewModel {
+    
+}
+
+extension PokedexViewModel: PokedexViewModeling {
+    func numberOfItemsInSection() -> Int {
+
+    }
+    
+    func cellForItemAt() {
+
+    }
+
+    func didSelectCellAt(_ index: Int) {
+        
+    }
+}
