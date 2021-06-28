@@ -10,7 +10,7 @@ final class PokedexViewModel {
 
 extension PokedexViewModel: PokedexViewModeling {
     func numberOfItemsInSection() -> Int {
-
+        5
     }
     
     func cellForItemAt() {
@@ -18,6 +18,6 @@ extension PokedexViewModel: PokedexViewModeling {
     }
 
     func didSelectCellAt(_ index: Int) {
-        
+
     }
 }
