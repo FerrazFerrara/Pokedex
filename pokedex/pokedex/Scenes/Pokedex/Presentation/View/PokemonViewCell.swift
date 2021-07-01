@@ -73,8 +73,6 @@ extension PokemonViewCell: ViewConfiguration {
     }
 
     func addConstraints() {
-//        backgroundSubview
-
         NSLayoutConstraint.activate([
             backgroundSubview.topAnchor.constraint(equalTo: self.contentView.topAnchor),
             backgroundSubview.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
