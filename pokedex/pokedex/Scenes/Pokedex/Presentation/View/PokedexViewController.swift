@@ -1,14 +1,21 @@
 import UIKit
 
+fileprivate enum Layout {
+    static let itemSpacing: CGFloat = 10
+}
+
 final class PokedexViewController: UIViewController {
     private let viewModel: PokedexViewModeling
 
     private lazy var pokemonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = Layout.itemSpacing
+        layout.minimumLineSpacing = Layout.itemSpacing
+        let itemSize = calculateItemSize()
+        layout.itemSize = CGSize(width: itemSize, height: itemSize)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PokemonViewCell.self, forCellWithReuseIdentifier: PokemonViewCell.identifier)
@@ -45,6 +52,24 @@ extension PokedexViewController: ViewConfiguration {
             pokemonCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             pokemonCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         ])
+    }
+
+    func additionalConfigurations() {
+        pokemonCollectionView.backgroundColor = .white
+        viewModel.getAllPokemons { [weak self] (didFinish) in
+            if didFinish {
+                DispatchQueue.main.sync {
+                    self?.pokemonCollectionView.reloadData()
+                }
+            }
+        }
+    }
+}
+
+private extension PokedexViewController {
+    func calculateItemSize() -> CGFloat {
+        CGFloat(viewModel.calculateItemSize(viewSize: Float(view.frame.width),
+                                    itensSpacing: Float(Layout.itemSpacing)))
     }
 }
 

@@ -6,17 +6,18 @@ protocol PokemonViewCellDisplaying {
 
 final class PokemonViewCell: UICollectionViewCell {
 
-    static let identifier = ""
+    static let identifier = "PokemonCell"
 
-    let defaultImage = ""
-    let defaultName = ""
-    let defaultNumber = ""
+    let defaultImage = "pokemonDefault"
+    let defaultName = "Pikachu"
+    let defaultNumber = "#25"
 
-    let fontName = ""
+    let fontName = "Arial"
 
     private lazy var pokemonImage: UIImageView = {
         let imageDefault = UIImage(named: defaultImage)
         let imageView = UIImageView(image: imageDefault)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.setContentHuggingPriority(.required, for: .horizontal)
 
@@ -25,7 +26,9 @@ final class PokemonViewCell: UICollectionViewCell {
 
     private lazy var pokemonNameLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = defaultName
+        label.textAlignment = .center
         label.font = UIFont(name: fontName, size: 16)
 
         return label
@@ -33,7 +36,9 @@ final class PokemonViewCell: UICollectionViewCell {
 
     private lazy var pokemonNumberLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = defaultNumber
+        label.textAlignment = .center
         label.font = UIFont(name: fontName, size: 14)
 
         return label
