@@ -1,8 +1,9 @@
-//
-//  PokemonResponse.swift
-//  pokedex
-//
-//  Created by Gabriel Fontes on 29/06/21.
-//
+struct PokemonListResponse: Decodable {
+    let next: String?
+    let previous: String?
+    let results: [PokemonResponse]
+}
 
-import Foundation
+struct PokemonResponse: Decodable {
+    let url: String
+}
