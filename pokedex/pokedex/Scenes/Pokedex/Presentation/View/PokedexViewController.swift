@@ -55,7 +55,7 @@ extension PokedexViewController: UICollectionViewDelegate, UICollectionViewDataS
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonViewCell.identifier, for: indexPath) as? PokemonViewCell
-
+        cell?.setupCell(with: viewModel.cellForItemAt(indexPath.row))
         return cell ?? PokemonViewCell()
     }
 

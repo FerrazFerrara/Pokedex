@@ -4,7 +4,7 @@ protocol PokemonViewCellDisplaying {
     func setupCell(with pokemon: PokemonCellModel)
 }
 
-class PokemonViewCell: UICollectionViewCell {
+final class PokemonViewCell: UICollectionViewCell {
 
     static let identifier = ""
 
