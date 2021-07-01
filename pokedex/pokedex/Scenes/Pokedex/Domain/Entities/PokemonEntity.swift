@@ -1,8 +1,14 @@
-//
-//  PokemonEntity.swift
-//  pokedex
-//
-//  Created by Gabriel Fontes on 29/06/21.
-//
+struct PokemonEntity {
+    let height: Int
+    let id: Int
+    let name: String
+    let sprite: String
+    let stats: [Stats]
+    let types: [String]
+    let weight: Int
+}
 
-import Foundation
+struct Stats {
+    let baseStat: Int
+    let name: String
+}
