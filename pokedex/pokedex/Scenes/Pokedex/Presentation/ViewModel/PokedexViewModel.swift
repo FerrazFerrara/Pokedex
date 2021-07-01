@@ -1,7 +1,7 @@
 import Foundation
 
 protocol PokedexViewModeling {
-    func getAllPokemons(finishLoading: @escaping (Bool) -> Void)
+    func getPokemons(finishLoading: @escaping (Bool) -> Void)
     func calculateItemSize(viewSize: Float, itensSpacing: Float) -> Float
     func numberOfItemsInSection() -> Int
     func cellForItemAt(_ row: Int) -> PokemonCellModel
@@ -41,12 +41,12 @@ private extension PokedexViewModel {
 }
 
 extension PokedexViewModel: PokedexViewModeling {
-    func getAllPokemons(finishLoading: @escaping (Bool) -> Void) {
+    func getPokemons(finishLoading: @escaping (Bool) -> Void) {
         getPokemonUseCase.getPokemonList { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let pokemonList):
-                self.pokemons = self.parsePokemonEntityToCellModel(pokemonsEntity: pokemonList)
+                self.pokemons.append(contentsOf: self.parsePokemonEntityToCellModel(pokemonsEntity: pokemonList))
                 finishLoading(true)
             case .failure(let error):
                 print(error)

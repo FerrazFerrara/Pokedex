@@ -12,7 +12,7 @@ private extension API {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, _)  in
+        let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, _, _)  in
             guard let data = data else {
                 completion(.failure(.noData))
                 return
@@ -23,6 +23,7 @@ private extension API {
                 return
             }
 
+            self?.nextURL = pokemonList.next
             completion(.success(pokemonList))
         }
         task.resume()

@@ -2,6 +2,7 @@ import UIKit
 
 fileprivate enum Layout {
     static let itemSpacing: CGFloat = 10
+    static let collectionSpacing: CGFloat = 15
 }
 
 final class PokedexViewController: UIViewController {
@@ -48,15 +49,17 @@ extension PokedexViewController: ViewConfiguration {
     func addConstraints() {
         NSLayoutConstraint.activate([
             pokemonCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            pokemonCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: Layout.itemSpacing),
+            pokemonCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: Layout.collectionSpacing),
             pokemonCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            pokemonCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -Layout.itemSpacing)
+            pokemonCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -Layout.collectionSpacing)
         ])
     }
 
     func additionalConfigurations() {
+        view.backgroundColor = .white
         pokemonCollectionView.backgroundColor = .white
-        viewModel.getAllPokemons { [weak self] (didFinish) in
+        
+        viewModel.getPokemons { [weak self] (didFinish) in
             if didFinish {
                 DispatchQueue.main.sync {
                     self?.pokemonCollectionView.reloadData()
