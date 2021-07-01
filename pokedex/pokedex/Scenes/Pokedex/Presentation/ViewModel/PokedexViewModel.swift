@@ -1,23 +1,28 @@
 protocol PokedexViewModeling {
+    func getAllPokemons()
     func numberOfItemsInSection() -> Int
-    func cellForItemAt()
-    func didSelectCellAt(_ index: Int)
+    func cellForItemAt(_ row: Int) -> PokemonCellModel
+    func didSelectCellAt(_ row: Int)
 }
 
 final class PokedexViewModel {
-    
+    var pokemons: [PokemonCellModel] = []
 }
 
 extension PokedexViewModel: PokedexViewModeling {
+    func getAllPokemons() {
+        
+    }
+
     func numberOfItemsInSection() -> Int {
-        5
+        pokemons.count
     }
     
-    func cellForItemAt() {
-
+    func cellForItemAt(_ row: Int) -> PokemonCellModel {
+        pokemons[row]
     }
 
-    func didSelectCellAt(_ index: Int) {
+    func didSelectCellAt(_ row: Int) {
 
     }
 }
