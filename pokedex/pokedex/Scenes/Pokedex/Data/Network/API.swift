@@ -1,47 +1,10 @@
 import Foundation
 
-final class API: Repository {
+final class API {
     var nextURL: String?
+}
 
-    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
-        let group = DispatchGroup()
-        var pokemonList: PokemonListResponse?
-        var pokemons: [PokemonEntity] = []
-
-        group.enter()
-        fetchPokemonList { result in
-            switch result {
-            case .success(let response):
-                pokemonList = response
-            case .failure(let error):
-                print(error)
-            }
-            group.leave()
-        }
-
-        guard let pokemonListResponse = pokemonList else {
-            completion(.failure(.noData))
-            return
-        }
-
-        for pokemonResult in pokemonListResponse.results {
-            group.enter()
-            fetchPokemon(url: pokemonResult.url) { result in
-                switch result {
-                case .success(let pokemonEntity):
-                    pokemons.append(pokemonEntity)
-                case .failure(let error):
-                    print(error)
-                }
-                group.leave()
-            }
-        }
-
-        group.notify(queue: DispatchQueue.global()) {
-            completion(.success(pokemons))
-        }
-    }
-
+private extension API {
     func fetchPokemonList(completion: @escaping (Result<PokemonListResponse, GetPokemonListError>) -> Void) {
         let pokemonEndPoint = nextURL ?? "https://pokeapi.co/api/v2/pokemon?limit=20"
         guard let urlRequest = createURLRequest(url: pokemonEndPoint) else {
@@ -94,7 +57,7 @@ final class API: Repository {
         task.resume()
     }
 
-    private func createURLRequest(url: String) -> URLRequest? {
+    func createURLRequest(url: String) -> URLRequest? {
         guard let url = URL(string: url) else {
             return nil
         }
@@ -102,7 +65,7 @@ final class API: Repository {
         return  URLRequest(url: url)
     }
 
-    private func parsePokemonResponseToEntity(pokemonInfo: PokemonInfoResponse) -> PokemonEntity {
+    func parsePokemonResponseToEntity(pokemonInfo: PokemonInfoResponse) -> PokemonEntity {
         let pokemonStats = pokemonInfo.stats.map { Stats(baseStat: $0.baseStat, name: $0.stat.name) }
         let pokemonTypes = pokemonInfo.types.map { $0.type.name }
         return PokemonEntity(height: pokemonInfo.height,
@@ -112,5 +75,35 @@ final class API: Repository {
                              stats: pokemonStats,
                              types: pokemonTypes,
                              weight: pokemonInfo.weight)
+    }
+}
+
+extension API: Repository {
+    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
+        let group = DispatchGroup()
+        var pokemons: [PokemonEntity] = []
+
+        fetchPokemonList { [weak self] result in
+            switch result {
+            case .success(let response):
+                for pokemonResult in response.results {
+                    group.enter()
+                    self?.fetchPokemon(url: pokemonResult.url) { result in
+                        switch result {
+                        case .success(let pokemonEntity):
+                            pokemons.append(pokemonEntity)
+                        case .failure(let error):
+                            print(error)
+                        }
+                        group.leave()
+                    }
+                }
+                group.notify(queue: DispatchQueue.global()) {
+                    completion(.success(pokemons))
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
