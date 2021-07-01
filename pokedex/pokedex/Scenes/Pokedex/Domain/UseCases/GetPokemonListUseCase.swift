@@ -16,8 +16,10 @@ extension GetPokemonList: GetPokemonListUseCase {
         repository.fetchPokemons { result in
             switch result {
             case .success(let pokemons):
-                print(pokemons)
-                completion(.success(pokemons))
+                let pokemonSorted = pokemons.sorted { (pokemon1, pokemon2) -> Bool in
+                    pokemon1.id < pokemon2.id
+                }
+                completion(.success(pokemonSorted))
             case .failure(let error):
                 print(error)
             }

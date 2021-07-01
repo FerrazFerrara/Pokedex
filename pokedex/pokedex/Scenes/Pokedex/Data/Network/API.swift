@@ -6,7 +6,7 @@ final class API {
 
 private extension API {
     func fetchPokemonList(completion: @escaping (Result<PokemonListResponse, GetPokemonListError>) -> Void) {
-        let pokemonEndPoint = nextURL ?? "https://pokeapi.co/api/v2/pokemon?limit=20"
+        let pokemonEndPoint = nextURL ?? "https://pokeapi.co/api/v2/pokemon?limit=51"
         guard let urlRequest = createURLRequest(url: pokemonEndPoint) else {
             completion(.failure(.generic))
             return

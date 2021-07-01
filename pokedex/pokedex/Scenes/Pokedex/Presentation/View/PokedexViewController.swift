@@ -48,9 +48,9 @@ extension PokedexViewController: ViewConfiguration {
     func addConstraints() {
         NSLayoutConstraint.activate([
             pokemonCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            pokemonCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            pokemonCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: Layout.itemSpacing),
             pokemonCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            pokemonCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+            pokemonCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -Layout.itemSpacing)
         ])
     }
 

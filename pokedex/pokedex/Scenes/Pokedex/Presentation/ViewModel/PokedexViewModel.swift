@@ -27,9 +27,12 @@ final class PokedexViewModel {
 private extension PokedexViewModel {
     func parsePokemonEntityToCellModel(pokemonsEntity: [PokemonEntity]) -> [PokemonCellModel] {
         pokemonsEntity.map {
-            guard let imageData = $0.sprite.data(using: .utf16) else { return PokemonCellModel(name: "Missigno",
-                                                                                               number: "#777",
-                                                                                               image: Data()) }
+            guard let url = URL(string: $0.sprite) else { return PokemonCellModel(name: "Missigno",
+                                                                                  number: "#777",
+                                                                                  image: Data()) }
+            guard let imageData = try? Data(contentsOf: url) else { return PokemonCellModel(name: "Missigno",
+                                                                                            number: "#777",
+                                                                                            image: Data()) }
             return PokemonCellModel(name: $0.name,
                                     number: "#\($0.id)",
                                     image: imageData)
