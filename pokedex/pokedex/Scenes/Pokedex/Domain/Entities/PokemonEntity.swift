@@ -12,3 +12,9 @@ struct Stats {
     let baseStat: Int
     let name: String
 }
+
+extension PokemonEntity: Equatable {
+    static func == (lhs: PokemonEntity, rhs: PokemonEntity) -> Bool {
+        lhs.id == rhs.id
+    }
+}

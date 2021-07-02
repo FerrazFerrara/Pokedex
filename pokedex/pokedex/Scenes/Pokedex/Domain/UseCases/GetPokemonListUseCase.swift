@@ -21,7 +21,7 @@ extension GetPokemonList: GetPokemonListUseCase {
                 }
                 completion(.success(pokemonSorted))
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
     }
