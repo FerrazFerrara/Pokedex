@@ -26,12 +26,6 @@ final class GetPokemonListStub: GetPokemonListUseCase {
     }
 }
 
-//func getPokemons(finishLoading: @escaping (Bool) -> Void)
-//func calculateItemSize(viewSize: Float, itensSpacing: Float) -> Float
-//func numberOfItemsInSection() -> Int
-//func cellForItemAt(_ row: Int) -> PokemonCellModel
-//func didSelectCellAt(_ row: Int)
-
 final class PokedexViewModelTests: XCTestCase {
     private let useCase = GetPokemonListStub()
     private lazy var sut = PokedexViewModel(getPokemonUseCase: useCase)

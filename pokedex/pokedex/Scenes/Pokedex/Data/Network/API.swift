@@ -1,10 +1,10 @@
 import Foundation
 
-final class API {
+final class APIPokedex {
     var nextURL: String?
 }
 
-private extension API {
+private extension APIPokedex {
     func fetch<T:Decodable>(url: String, completion: @escaping (Result<T, GetPokemonListError>) -> Void) {
         guard let urlRequest = createURLRequest(url: url) else {
             completion(.failure(.generic))
@@ -80,7 +80,7 @@ private extension API {
     }
 }
 
-extension API: Repository {
+extension APIPokedex: Repository {
     func fetchPokemons(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
         let pokemonEndPoint = nextURL ?? "https://pokeapi.co/api/v2/pokemon?limit=51"
         let group = DispatchGroup()
