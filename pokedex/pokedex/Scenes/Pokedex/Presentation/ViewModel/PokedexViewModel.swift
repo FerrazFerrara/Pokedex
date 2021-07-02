@@ -64,7 +64,10 @@ extension PokedexViewModel: PokedexViewModeling {
     }
     
     func cellForItemAt(_ row: Int) -> PokemonCellModel {
-        pokemons[row]
+        guard pokemons.count > row else {
+            return PokemonCellModel(name: "Pikachu", number: "#25", image: Data())
+        }
+        return pokemons[row]
     }
 
     func didSelectCellAt(_ row: Int) {

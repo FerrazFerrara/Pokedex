@@ -33,10 +33,10 @@ final class GetPokemonListUseCaseTests: XCTestCase {
     func testGetPokemonList_WhenSuccessfullyGetPokemonList_ShouldReturnPokemonSorted() {
         repository.setPokemonList(pokemons: PokemonEntityDumb.list())
 
-        sut.getPokemonList { result in
+        sut.getPokemonList { [weak self] result in
             switch result {
             case .success(let entity):
-                XCTAssertEqual(self.repository.callFetchPokemons, 1)
+                XCTAssertEqual(self?.repository.callFetchPokemons, 1)
                 XCTAssertEqual(PokemonEntityDumb.list(), entity)
             case .failure(_):
                 XCTFail()
@@ -47,12 +47,12 @@ final class GetPokemonListUseCaseTests: XCTestCase {
     func testGetPokemonList_WhenReceiveError_ShouldReturnError() {
         repository.setError(error: .generic)
 
-        sut.getPokemonList { result in
+        sut.getPokemonList { [weak self] result in
             switch result {
             case .success(_):
                 XCTFail()
             case .failure(let error):
-                XCTAssertEqual(self.repository.callFetchPokemons, 1)
+                XCTAssertEqual(self?.repository.callFetchPokemons, 1)
                 XCTAssertEqual(GetPokemonListError.generic, error)
             }
         }

@@ -5,3 +5,5 @@ struct PokemonCellModel {
     let number: String
     let image: Data
 }
+
+extension PokemonCellModel: Equatable { }
