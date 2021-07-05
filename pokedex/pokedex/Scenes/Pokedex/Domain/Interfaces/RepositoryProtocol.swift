@@ -1,3 +1,5 @@
+import CoreNetwork
+
 protocol Repository {
-    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void)
+    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void)
 }

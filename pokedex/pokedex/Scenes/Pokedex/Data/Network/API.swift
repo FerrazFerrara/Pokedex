@@ -1,48 +1,24 @@
 import Foundation
+import CoreNetwork
 
 final class APIPokedex {
     var nextURL: String?
+    var api: APIRepository
+
+    init(api: APIRepository) {
+        self.api = api
+    }
 }
 
 private extension APIPokedex {
-    func fetch<T:Decodable>(url: String, completion: @escaping (Result<T, GetPokemonListError>) -> Void) {
-        guard let urlRequest = createURLRequest(url: url) else {
-            completion(.failure(.generic))
-            return
-        }
-
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, _)  in
-            guard let data = data else {
-                completion(.failure(.noData))
-                return
-            }
-
-            guard let value = try? JSONDecoder().decode(T.self, from: data) else {
-                completion(.failure(.generic))
-                return
-            }
-
-            completion(.success(value))
-        }
-        task.resume()
-    }
-
-    func createURLRequest(url: String) -> URLRequest? {
-        guard let url = URL(string: url) else {
-            return nil
-        }
-
-        return  URLRequest(url: url)
-    }
-
-    func getPokemonEntity(response: PokemonListResponse, completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
+    func getPokemonEntity(response: PokemonListResponse, completion: @escaping (Result<[PokemonEntity], APIError>) -> Void) {
         let group = DispatchGroup()
-        var getPokemonListError: GetPokemonListError?
+        var getPokemonListError: APIError?
         var pokemons: [PokemonEntity] = []
 
         response.results.forEach { [weak self] pokemonResponse in
             group.enter()
-            self?.fetch(url: pokemonResponse.url) { (pokemonInfoResponse: Result<PokemonInfoResponse, GetPokemonListError>) in
+            self?.api.fetch(url: pokemonResponse.url) { (pokemonInfoResponse: Result<PokemonInfoResponse, APIError>) in
                 switch pokemonInfoResponse {
                 case .success(let pokemonInfo):
                     guard let pokemonEntity = self?.parsePokemonResponseToEntity(pokemonInfo: pokemonInfo) else {
@@ -81,14 +57,14 @@ private extension APIPokedex {
 }
 
 extension APIPokedex: Repository {
-    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
+    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void) {
         let pokemonEndPoint = nextURL ?? "https://pokeapi.co/api/v2/pokemon?limit=51"
         let group = DispatchGroup()
-        var getPokemonListError: GetPokemonListError?
+        var getPokemonListError: APIError?
         var pokemonListResponse: PokemonListResponse?
 
         group.enter()
-        fetch(url: pokemonEndPoint) { [weak self] (result: Result<PokemonListResponse, GetPokemonListError>) in
+        api.fetch(url: pokemonEndPoint) { [weak self] (result: Result<PokemonListResponse, APIError>) in
             switch result {
             case .success(let response):
                 pokemonListResponse = response
@@ -102,7 +78,7 @@ extension APIPokedex: Repository {
 
         group.notify(queue: DispatchQueue.global()) { [weak self] in
             if let response = pokemonListResponse {
-                self?.getPokemonEntity(response: response) { (entities: Result<[PokemonEntity], GetPokemonListError>) in
+                self?.getPokemonEntity(response: response) { (entities: Result<[PokemonEntity], APIError>) in
                     completion(entities)
                 }
             } else {

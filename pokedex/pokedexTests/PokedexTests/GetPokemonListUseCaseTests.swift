@@ -1,9 +1,10 @@
 import XCTest
+import CoreNetwork
 @testable import pokedex
 
 final class RepositoryStub: Repository {
     private(set) var pokemons: [PokemonEntity] = []
-    private(set) var error: GetPokemonListError?
+    private(set) var error: APIError?
 
     private(set) var callFetchPokemons = 0
 
@@ -11,11 +12,11 @@ final class RepositoryStub: Repository {
         self.pokemons = pokemons
     }
 
-    func setError(error: GetPokemonListError) {
+    func setError(error: APIError) {
         self.error = error
     }
 
-    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
+    func fetchPokemons(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void) {
         callFetchPokemons += 1
 
         if let error = self.error {
@@ -53,7 +54,7 @@ final class GetPokemonListUseCaseTests: XCTestCase {
                 XCTFail()
             case .failure(let error):
                 XCTAssertEqual(self?.repository.callFetchPokemons, 1)
-                XCTAssertEqual(GetPokemonListError.generic, error)
+                XCTAssertEqual(APIError.generic, error)
             }
         }
     }

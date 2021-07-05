@@ -1,9 +1,10 @@
 import XCTest
+import CoreNetwork
 @testable import pokedex
 
 final class GetPokemonListStub: GetPokemonListUseCase {
     private(set) var pokemons: [PokemonEntity] = []
-    private(set) var error: GetPokemonListError?
+    private(set) var error: APIError?
 
     private(set) var callGetPokemons = 0
 
@@ -11,11 +12,11 @@ final class GetPokemonListStub: GetPokemonListUseCase {
         self.pokemons = pokemons
     }
 
-    func setError(error: GetPokemonListError) {
+    func setError(error: APIError) {
         self.error = error
     }
 
-    func getPokemonList(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
+    func getPokemonList(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void) {
         callGetPokemons += 1
 
         if let error = self.error {
@@ -50,7 +51,7 @@ final class PokedexViewModelTests: XCTestCase {
         sut.getPokemons { [weak self] didFinish in
             if didFinish {
                 XCTAssertEqual(self?.useCase.callGetPokemons, 1)
-                XCTAssertEqual(self?.useCase.error, GetPokemonListError.generic)
+                XCTAssertEqual(self?.useCase.error, APIError.generic)
                 XCTAssertEqual(self?.useCase.pokemons, [])
             } else {
                 XCTFail()

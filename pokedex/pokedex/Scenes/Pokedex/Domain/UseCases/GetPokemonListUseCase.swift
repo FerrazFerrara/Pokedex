@@ -1,10 +1,7 @@
-enum GetPokemonListError: Error {
-    case generic
-    case noData
-}
+import CoreNetwork
 
 protocol GetPokemonListUseCase {
-    func getPokemonList(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void)
+    func getPokemonList(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void)
 }
 
 struct GetPokemonList {
@@ -12,7 +9,7 @@ struct GetPokemonList {
 }
 
 extension GetPokemonList: GetPokemonListUseCase {
-    func getPokemonList(completion: @escaping (Result<[PokemonEntity], GetPokemonListError>) -> Void) {
+    func getPokemonList(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void) {
         repository.fetchPokemons { result in
             switch result {
             case .success(let pokemons):
