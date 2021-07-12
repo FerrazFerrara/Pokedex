@@ -1,10 +1,4 @@
-//
-//  SceneDelegate.swift
-//  pokedex
-//
-//  Created by Gabriel Fontes on 25/06/21.
-//
-
+import PokemonPokedex
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -15,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = PokedexFactory.make()
+            window.rootViewController = PokedexFactory.make(api: Injector().make())
             self.window = window
             window.makeKeyAndVisible()
         }
