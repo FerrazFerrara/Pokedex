@@ -1,5 +1,5 @@
 import Foundation
-import CoreNetwork
+import CoreNetworkProtocols
 
 final class APIPokedex {
     var nextURL: String?

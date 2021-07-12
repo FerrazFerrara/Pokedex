@@ -1,5 +1,6 @@
 import UIKit
 import CoreNetwork
+import CoreNetworkProtocols
 
 enum PokedexFactory {
     static func make() -> UIViewController {

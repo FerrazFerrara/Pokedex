@@ -1,4 +1,4 @@
-import CoreNetwork
+import CoreNetworkProtocols
 
 protocol GetPokemonListUseCase {
     func getPokemonList(completion: @escaping (Result<[PokemonEntity], APIError>) -> Void)
