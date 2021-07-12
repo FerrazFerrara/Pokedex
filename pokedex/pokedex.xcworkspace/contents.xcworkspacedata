@@ -13,4 +13,10 @@
    <FileRef
       location = "group:CoreNetworkProtocols/CoreNetworkProtocols.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:PokemonInfo/PokemonInfo.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:UI/UI.xcodeproj">
+   </FileRef>
 </Workspace>

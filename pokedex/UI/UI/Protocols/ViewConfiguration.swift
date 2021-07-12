@@ -1,11 +1,11 @@
-protocol ViewConfiguration {
+public protocol ViewConfiguration {
     func buildHierarchy()
     func addConstraints()
     func additionalConfigurations()
     func setupScene()
 }
 
-extension ViewConfiguration {
+public extension ViewConfiguration {
     func additionalConfigurations() {}
 
     func setupScene() {

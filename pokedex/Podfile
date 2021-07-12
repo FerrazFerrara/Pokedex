@@ -23,7 +23,7 @@ target 'CoreNetwork' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for pokedex
+  # Pods for CoreNetwork
 
   target 'CoreNetworkTests' do
     inherit! :search_paths
@@ -37,9 +37,37 @@ target 'CoreNetworkProtocols' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for pokedex
+  # Pods for CoreNetworkProtocols
 
   target 'CoreNetworkProtocolsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'PokemonInfo' do
+  project 'PokemonInfo/PokemonInfo.project'
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for PokemonInfo
+
+  target 'PokemonInfoTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'UI' do
+  project 'UI/UI.project'
+  # Comment the next line if you don't want to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for UI
+
+  target 'UITests' do
     inherit! :search_paths
     # Pods for testing
   end
