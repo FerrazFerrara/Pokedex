@@ -12,7 +12,6 @@
 		B10D9AF9268FB03700D7E9C7 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10D9AF8268FB03700D7E9C7 /* API.swift */; };
 		B10D9B032692A54A00D7E9C7 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10D9B022692A54A00D7E9C7 /* APITests.swift */; };
 		B12F0745268FA917009BC2B0 /* CoreNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12F073B268FA917009BC2B0 /* CoreNetwork.framework */; };
-		B12F074A268FA917009BC2B0 /* CoreNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12F0749268FA917009BC2B0 /* CoreNetworkTests.swift */; };
 		B12F074C268FA917009BC2B0 /* CoreNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = B12F073E268FA917009BC2B0 /* CoreNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B19D870526978EFA00BC7E09 /* CoreNetworkProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19D870426978EFA00BC7E09 /* CoreNetworkProtocols.framework */; };
 		B19D870626978EFA00BC7E09 /* CoreNetworkProtocols.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B19D870426978EFA00BC7E09 /* CoreNetworkProtocols.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -54,7 +53,6 @@
 		B12F073E268FA917009BC2B0 /* CoreNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreNetwork.h; sourceTree = "<group>"; };
 		B12F073F268FA917009BC2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B12F0744268FA917009BC2B0 /* CoreNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B12F0749268FA917009BC2B0 /* CoreNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreNetworkTests.swift; sourceTree = "<group>"; };
 		B12F074B268FA917009BC2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B19D870426978EFA00BC7E09 /* CoreNetworkProtocols.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreNetworkProtocols.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEAE86A1B7533725FF134B0 /* Pods_CoreNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +135,6 @@
 		B12F0748268FA917009BC2B0 /* CoreNetworkTests */ = {
 			isa = PBXGroup;
 			children = (
-				B12F0749268FA917009BC2B0 /* CoreNetworkTests.swift */,
 				B12F074B268FA917009BC2B0 /* Info.plist */,
 				B10D9B022692A54A00D7E9C7 /* APITests.swift */,
 			);
@@ -312,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B10D9B032692A54A00D7E9C7 /* APITests.swift in Sources */,
-				B12F074A268FA917009BC2B0 /* CoreNetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

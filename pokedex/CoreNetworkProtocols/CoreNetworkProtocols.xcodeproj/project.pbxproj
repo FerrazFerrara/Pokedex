@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AFE83C67A9AE5601D12AE879 /* Pods_CoreNetworkProtocolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A13DA48DE9B064358DA1DA9 /* Pods_CoreNetworkProtocolsTests.framework */; };
 		B19D86E126978D3D00BC7E09 /* CoreNetworkProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19D86D726978D3D00BC7E09 /* CoreNetworkProtocols.framework */; };
-		B19D86E626978D3D00BC7E09 /* CoreNetworkProtocolsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19D86E526978D3D00BC7E09 /* CoreNetworkProtocolsTests.swift */; };
 		B19D86E826978D3D00BC7E09 /* CoreNetworkProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = B19D86DA26978D3D00BC7E09 /* CoreNetworkProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B19D870126978E4C00BC7E09 /* APIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19D870026978E4C00BC7E09 /* APIRepository.swift */; };
 		E5C8938C276DE68B8148BDD1 /* Pods_CoreNetworkProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6955B5AD37634DBE0F026AEF /* Pods_CoreNetworkProtocols.framework */; };
@@ -33,7 +32,6 @@
 		B19D86DA26978D3D00BC7E09 /* CoreNetworkProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreNetworkProtocols.h; sourceTree = "<group>"; };
 		B19D86DB26978D3D00BC7E09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B19D86E026978D3D00BC7E09 /* CoreNetworkProtocolsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreNetworkProtocolsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B19D86E526978D3D00BC7E09 /* CoreNetworkProtocolsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreNetworkProtocolsTests.swift; sourceTree = "<group>"; };
 		B19D86E726978D3D00BC7E09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B19D870026978E4C00BC7E09 /* APIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRepository.swift; sourceTree = "<group>"; };
 		B5B6930F4BFC1CF378E17793 /* Pods-CoreNetworkProtocolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoreNetworkProtocolsTests.debug.xcconfig"; path = "Target Support Files/Pods-CoreNetworkProtocolsTests/Pods-CoreNetworkProtocolsTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 		B19D86E426978D3D00BC7E09 /* CoreNetworkProtocolsTests */ = {
 			isa = PBXGroup;
 			children = (
-				B19D86E526978D3D00BC7E09 /* CoreNetworkProtocolsTests.swift */,
 				B19D86E726978D3D00BC7E09 /* Info.plist */,
 			);
 			path = CoreNetworkProtocolsTests;
@@ -288,7 +285,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B19D86E626978D3D00BC7E09 /* CoreNetworkProtocolsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

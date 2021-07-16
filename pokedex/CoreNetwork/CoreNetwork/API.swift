@@ -16,7 +16,7 @@ public final class API {
 extension API: APIRepository {
     public func fetch<T:Decodable>(url: String, completion: @escaping (Result<T, APIError>) -> Void) {
         guard let urlRequest = createURLRequest(url: url) else {
-            completion(.failure(.generic))
+            completion(.failure(.urlUnknown))
             return
         }
 
@@ -27,7 +27,7 @@ extension API: APIRepository {
             }
 
             guard let value = try? JSONDecoder().decode(T.self, from: data) else {
-                completion(.failure(.generic))
+                completion(.failure(.decoderError))
                 return
             }
 

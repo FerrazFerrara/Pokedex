@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		63FC9D64020E6F34CC59EE08 /* Pods_PokemonInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D45F2C03B26C9E0E5A29EEE2 /* Pods_PokemonInfo.framework */; };
 		B16CB555269CD6BA00640B7F /* PokemonInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B16CB54B269CD6BA00640B7F /* PokemonInfo.framework */; };
-		B16CB55A269CD6BA00640B7F /* PokemonInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16CB559269CD6BA00640B7F /* PokemonInfoTests.swift */; };
 		B16CB55C269CD6BA00640B7F /* PokemonInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = B16CB54E269CD6BA00640B7F /* PokemonInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1783188269CD904006C954D /* PokemonInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1783187269CD904006C954D /* PokemonInfoViewController.swift */; };
 		DDE855133393CA5735771CEC /* Pods_PokemonInfoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A24DF9813EA31A79ABEF53 /* Pods_PokemonInfoTests.framework */; };
@@ -34,7 +33,6 @@
 		B16CB54E269CD6BA00640B7F /* PokemonInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PokemonInfo.h; sourceTree = "<group>"; };
 		B16CB54F269CD6BA00640B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B16CB554269CD6BA00640B7F /* PokemonInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B16CB559269CD6BA00640B7F /* PokemonInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoTests.swift; sourceTree = "<group>"; };
 		B16CB55B269CD6BA00640B7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B1783187269CD904006C954D /* PokemonInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoViewController.swift; sourceTree = "<group>"; };
 		D45F2C03B26C9E0E5A29EEE2 /* Pods_PokemonInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +114,6 @@
 		B16CB558269CD6BA00640B7F /* PokemonInfoTests */ = {
 			isa = PBXGroup;
 			children = (
-				B16CB559269CD6BA00640B7F /* PokemonInfoTests.swift */,
 				B16CB55B269CD6BA00640B7F /* Info.plist */,
 			);
 			path = PokemonInfoTests;
@@ -344,7 +341,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B16CB55A269CD6BA00640B7F /* PokemonInfoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
