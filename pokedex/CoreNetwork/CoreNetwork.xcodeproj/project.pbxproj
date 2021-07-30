@@ -13,6 +13,8 @@
 		B10D9B032692A54A00D7E9C7 /* APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10D9B022692A54A00D7E9C7 /* APITests.swift */; };
 		B12F0745268FA917009BC2B0 /* CoreNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B12F073B268FA917009BC2B0 /* CoreNetwork.framework */; };
 		B12F074C268FA917009BC2B0 /* CoreNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = B12F073E268FA917009BC2B0 /* CoreNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1772C9826A21A6A0069D003 /* pokemonMock.json in Resources */ = {isa = PBXBuildFile; fileRef = B1772C9726A21A6A0069D003 /* pokemonMock.json */; };
+		B1772C9B26A21AD50069D003 /* invalidPokemonMock.json in Resources */ = {isa = PBXBuildFile; fileRef = B1772C9A26A21AD50069D003 /* invalidPokemonMock.json */; };
 		B19D870526978EFA00BC7E09 /* CoreNetworkProtocols.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19D870426978EFA00BC7E09 /* CoreNetworkProtocols.framework */; };
 		B19D870626978EFA00BC7E09 /* CoreNetworkProtocols.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B19D870426978EFA00BC7E09 /* CoreNetworkProtocols.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 		B12F073F268FA917009BC2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B12F0744268FA917009BC2B0 /* CoreNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B12F074B268FA917009BC2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1772C9726A21A6A0069D003 /* pokemonMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = pokemonMock.json; sourceTree = "<group>"; };
+		B1772C9A26A21AD50069D003 /* invalidPokemonMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = invalidPokemonMock.json; sourceTree = "<group>"; };
 		B19D870426978EFA00BC7E09 /* CoreNetworkProtocols.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreNetworkProtocols.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDEAE86A1B7533725FF134B0 /* Pods_CoreNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoreNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,10 +139,20 @@
 		B12F0748268FA917009BC2B0 /* CoreNetworkTests */ = {
 			isa = PBXGroup;
 			children = (
+				B1772C9926A21AB30069D003 /* MockJSON */,
 				B12F074B268FA917009BC2B0 /* Info.plist */,
 				B10D9B022692A54A00D7E9C7 /* APITests.swift */,
 			);
 			path = CoreNetworkTests;
+			sourceTree = "<group>";
+		};
+		B1772C9926A21AB30069D003 /* MockJSON */ = {
+			isa = PBXGroup;
+			children = (
+				B1772C9726A21A6A0069D003 /* pokemonMock.json */,
+				B1772C9A26A21AD50069D003 /* invalidPokemonMock.json */,
+			);
+			path = MockJSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +257,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1772C9826A21A6A0069D003 /* pokemonMock.json in Resources */,
+				B1772C9B26A21AD50069D003 /* invalidPokemonMock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

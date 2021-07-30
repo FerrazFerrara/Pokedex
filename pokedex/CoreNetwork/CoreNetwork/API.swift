@@ -1,26 +1,35 @@
 import Foundation
 import CoreNetworkProtocols
 
-public final class API {
-    public init() {}
+public protocol NetworkSession {
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void)
+}
 
-    func createURLRequest(url: String) -> URLRequest? {
-        guard let url = URL(string: url) else {
-            return nil
+extension URLSession: NetworkSession {
+    public func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        let dataTask = dataTask(with: url) { data, urlResponse, error in
+            completion(data, urlResponse, error)
         }
+        dataTask.resume()
+    }
+}
 
-        return  URLRequest(url: url)
+public final class API {
+    let networkSession: NetworkSession
+
+    public init(networkSession: NetworkSession = URLSession.shared) {
+        self.networkSession = networkSession
     }
 }
 
 extension API: APIRepository {
-    public func fetch<T:Decodable>(url: String, completion: @escaping (Result<T, APIError>) -> Void) {
-        guard let urlRequest = createURLRequest(url: url) else {
+    public func fetch<T:Decodable>(endpoint: String, completion: @escaping (Result<T, APIError>) -> Void) {
+        guard let url = URL(string: endpoint) else {
             completion(.failure(.urlUnknown))
             return
         }
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, _, _)  in
+        networkSession.loadData(url: url) { data, response, error in
             guard let data = data else {
                 completion(.failure(.noData))
                 return
@@ -33,6 +42,5 @@ extension API: APIRepository {
 
             completion(.success(value))
         }
-        task.resume()
     }
 }

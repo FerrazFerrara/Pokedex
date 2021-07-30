@@ -6,5 +6,5 @@ public enum APIError: Error {
 }
 
 public protocol APIRepository {
-    func fetch<T:Decodable>(url: String, completion: @escaping (Result<T, APIError>) -> Void)
+    func fetch<T:Decodable>(endpoint: String, completion: @escaping (Result<T, APIError>) -> Void)
 }

@@ -18,7 +18,7 @@ private extension APIPokedex {
 
         response.results.forEach { [weak self] pokemonResponse in
             group.enter()
-            self?.api.fetch(url: pokemonResponse.url) { (pokemonInfoResponse: Result<PokemonInfoResponse, APIError>) in
+            self?.api.fetch(endpoint: pokemonResponse.url) { (pokemonInfoResponse: Result<PokemonInfoResponse, APIError>) in
                 switch pokemonInfoResponse {
                 case .success(let pokemonInfo):
                     guard let pokemonEntity = self?.parsePokemonResponseToEntity(pokemonInfo: pokemonInfo) else {
@@ -64,7 +64,7 @@ extension APIPokedex: Repository {
         var pokemonListResponse: PokemonListResponse?
 
         group.enter()
-        api.fetch(url: pokemonEndPoint) { [weak self] (result: Result<PokemonListResponse, APIError>) in
+        api.fetch(endpoint: pokemonEndPoint) { [weak self] (result: Result<PokemonListResponse, APIError>) in
             switch result {
             case .success(let response):
                 pokemonListResponse = response

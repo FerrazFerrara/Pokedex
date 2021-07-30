@@ -7,19 +7,27 @@ struct PokemonDummy: Decodable {
     let name: String
 }
 
-struct PokemonDecodeErrorFake: Decodable {
-    let identifier: Int
-    let names: String
+final class NetworkSessionMock: NetworkSession {
+    var data: Data?
+    var urlResponse: URLResponse?
+    var error: Error?
+
+    func loadData(url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
+        completion(data, urlResponse, error)
+    }
 }
 
 final class APITests: XCTestCase {
-    let urlString = "https://pokeapi.co/api/v2/pokemon/ditto"
-    private lazy var sut = API()
+    lazy var urlValidPokemon = Bundle(for: type(of: self)).url(forResource: "pokemonMock", withExtension: "json")
+    lazy var urlInvalidPokemon = Bundle(for: type(of: self)).url(forResource: "invalidPokemonMock", withExtension: "json")
+    let networkSession = NetworkSessionMock()
+    private lazy var sut = API(networkSession: networkSession)
 
     func testFetch_WhenUrlIsInvalid_ShouldReturnError() {
         let expectation = XCTestExpectation(description: "Url Error")
+        networkSession.error = APIError.urlUnknown
 
-        sut.fetch(url: "") { (result: Result<PokemonDummy, APIError>) in
+        sut.fetch(endpoint: "") { (result: Result<PokemonDummy, APIError>) in
             switch result {
             case .success(_):
                 XCTFail()
@@ -33,16 +41,14 @@ final class APITests: XCTestCase {
     }
 
     func testFetch_WhenNoDataReturned_ShouldReturnError() {
-        let urlStringError = "https://pokeapi.co/api/v2/pokemon/999"
         let expectation = XCTestExpectation(description: "No Data")
 
-        sut.fetch(url: urlStringError) { (result: Result<PokemonDummy, APIError>) in
+        sut.fetch(endpoint: "https://pokeapi.co/") { (result: Result<PokemonDummy, APIError>) in
             switch result {
             case .success(_):
                 XCTFail()
             case .failure(let error):
-//                XCTAssertEqual(error, APIError.noData)
-                XCTAssertNotNil(error)
+                XCTAssertEqual(error, APIError.noData)
             }
             expectation.fulfill()
         }
@@ -50,10 +56,13 @@ final class APITests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testFetch_WhenDecoderFailed_ShouldReturnError() {
+    func testFetch_WhenDecoderFailed_ShouldReturnError() throws {
         let expectation = XCTestExpectation(description: "Decoder Error")
+        networkSession.error = APIError.decoderError
+        let url = try XCTUnwrap(urlInvalidPokemon)
+        networkSession.data = try Data(contentsOf: url)
 
-        sut.fetch(url: urlString) { (result: Result<PokemonDecodeErrorFake, APIError>) in
+        sut.fetch(endpoint: "https://pokeapi.co/") { (result: Result<PokemonDummy, APIError>) in
             switch result {
             case .success(_):
                 XCTFail()
@@ -66,16 +75,18 @@ final class APITests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testFetch_WhenSuccess_ShouldReturnValueDecoded() {
+    func testFetch_WhenSuccess_ShouldReturnValueDecoded() throws {
         let expectation = XCTestExpectation(description: "Success")
+        let url = try XCTUnwrap(urlValidPokemon)
+        networkSession.data = try Data(contentsOf: url)
 
-        sut.fetch(url: urlString) { (result: Result<PokemonDummy, APIError>) in
+        sut.fetch(endpoint: "https://pokeapi.co/") { (result: Result<PokemonDummy, APIError>) in
             switch result {
             case .success(let pokemon):
                 XCTAssertEqual(pokemon.id, 132)
                 XCTAssertEqual(pokemon.name, "ditto")
-            case .failure(_):
-                XCTFail()
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
             }
             expectation.fulfill()
         }
