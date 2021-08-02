@@ -6,7 +6,7 @@ fileprivate enum Layout {
     static let collectionSpacing: CGFloat = 15
 }
 
-final class PokedexViewController: UIViewController {
+final class PokedexScreen: UIView {
     private let viewModel: PokedexViewModeling
 
     private lazy var pokemonCollectionView: UICollectionView = {
@@ -14,12 +14,13 @@ final class PokedexViewController: UIViewController {
         layout.minimumInteritemSpacing = Layout.itemSpacing
         layout.minimumLineSpacing = Layout.itemSpacing
         let itemSize = calculateItemSize()
+        print("aaaaaa \(itemSize)")
         layout.itemSize = CGSize(width: itemSize, height: itemSize)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.register(PokemonViewCell.self, forCellWithReuseIdentifier: PokemonViewCell.identifier)
 
         return collectionView
@@ -27,37 +28,39 @@ final class PokedexViewController: UIViewController {
 
     init(viewModel: PokedexViewModeling) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        super.init(frame: .zero)
 
         setupScene()
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
-extension PokedexViewController: ViewConfiguration {
+private extension PokedexScreen {
+    func calculateItemSize() -> CGFloat {
+        CGFloat(viewModel.calculateItemSize(viewSize: Float(UIScreen.main.bounds.width),
+                                    itensSpacing: Float(Layout.itemSpacing)))
+    }
+}
+
+extension PokedexScreen: ViewConfiguration {
     func buildHierarchy() {
-        view.addSubview(pokemonCollectionView)
+        addSubview(pokemonCollectionView)
     }
 
     func addConstraints() {
         NSLayoutConstraint.activate([
-            pokemonCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            pokemonCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: Layout.collectionSpacing),
-            pokemonCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            pokemonCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -Layout.collectionSpacing)
+            pokemonCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            pokemonCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Layout.collectionSpacing),
+            pokemonCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            pokemonCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Layout.collectionSpacing)
         ])
     }
 
     func additionalConfigurations() {
-        view.backgroundColor = .white
+        backgroundColor = .white
         pokemonCollectionView.backgroundColor = .white
 
         viewModel.getPokemons { [weak self] (didFinish) in
@@ -70,14 +73,7 @@ extension PokedexViewController: ViewConfiguration {
     }
 }
 
-private extension PokedexViewController {
-    func calculateItemSize() -> CGFloat {
-        CGFloat(viewModel.calculateItemSize(viewSize: Float(view.frame.width),
-                                    itensSpacing: Float(Layout.itemSpacing)))
-    }
-}
-
-extension PokedexViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PokedexScreen: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.numberOfItemsInSection()
     }
