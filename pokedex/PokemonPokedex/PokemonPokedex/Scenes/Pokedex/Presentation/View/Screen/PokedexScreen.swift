@@ -4,44 +4,50 @@ import UIKit
 fileprivate enum Layout {
     static let itemSpacing: CGFloat = 10
     static let collectionSpacing: CGFloat = 15
+    static let itemSize: CGFloat = (UIScreen.main.bounds.width / 3) - (Layout.itemSpacing * 2)
 }
 
 final class PokedexScreen: UIView {
-    private let viewModel: PokedexViewModeling
+    let collectionDelegate: UICollectionViewDelegate
+    let collectionDataSource: UICollectionViewDataSource
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.color = .darkGray
+
+        return activity
+    }()
 
     private lazy var pokemonCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = Layout.itemSpacing
         layout.minimumLineSpacing = Layout.itemSpacing
-        let itemSize = calculateItemSize()
-        print("aaaaaa \(itemSize)")
+        let itemSize = Layout.itemSize
         layout.itemSize = CGSize(width: itemSize, height: itemSize)
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        collectionView.delegate = collectionDelegate
+        collectionView.dataSource = collectionDataSource
         collectionView.register(PokemonViewCell.self, forCellWithReuseIdentifier: PokemonViewCell.identifier)
+        collectionView.backgroundView = activityIndicator
+        activityIndicator.startAnimating()
 
         return collectionView
     }()
 
-    init(viewModel: PokedexViewModeling) {
-        self.viewModel = viewModel
+    init(collectionDelegate: UICollectionViewDelegate,
+         collectionDataSource: UICollectionViewDataSource) {
+        self.collectionDelegate = collectionDelegate
+        self.collectionDataSource = collectionDataSource
         super.init(frame: .zero)
 
         setupScene()
     }
-    
+
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-private extension PokedexScreen {
-    func calculateItemSize() -> CGFloat {
-        CGFloat(viewModel.calculateItemSize(viewSize: Float(UIScreen.main.bounds.width),
-                                    itensSpacing: Float(Layout.itemSpacing)))
     }
 }
 
@@ -62,29 +68,12 @@ extension PokedexScreen: ViewConfiguration {
     func additionalConfigurations() {
         backgroundColor = .white
         pokemonCollectionView.backgroundColor = .white
-
-        viewModel.getPokemons { [weak self] (didFinish) in
-            if didFinish {
-                DispatchQueue.main.sync {
-                    self?.pokemonCollectionView.reloadData()
-                }
-            }
-        }
     }
 }
 
-extension PokedexScreen: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.numberOfItemsInSection()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PokemonViewCell.identifier, for: indexPath) as? PokemonViewCell
-        cell?.setupCell(with: viewModel.cellForItemAt(indexPath.row))
-        return cell ?? PokemonViewCell()
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.didSelectCellAt(indexPath.row)
+extension PokedexScreen {
+    func reloadCollection() {
+        activityIndicator.stopAnimating()
+        pokemonCollectionView.reloadData()
     }
 }

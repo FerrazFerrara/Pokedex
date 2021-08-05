@@ -2,7 +2,6 @@ import Foundation
 
 protocol PokedexViewModeling {
     func getPokemons(finishLoading: @escaping (Bool) -> Void)
-    func calculateItemSize(viewSize: Float, itensSpacing: Float) -> Float
     func numberOfItemsInSection() -> Int
     func cellForItemAt(_ row: Int) -> PokemonCellModel
     func didSelectCellAt(_ row: Int)
@@ -53,10 +52,6 @@ extension PokedexViewModel: PokedexViewModeling {
                 finishLoading(true)
             }
         }
-    }
-
-    func calculateItemSize(viewSize: Float, itensSpacing: Float) -> Float {
-        (viewSize / 3) - (itensSpacing * 2)
     }
 
     func numberOfItemsInSection() -> Int {
