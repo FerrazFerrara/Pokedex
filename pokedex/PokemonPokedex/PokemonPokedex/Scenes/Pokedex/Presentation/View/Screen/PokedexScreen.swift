@@ -57,12 +57,10 @@ extension PokedexScreen: ViewConfiguration {
     }
 
     func addConstraints() {
-        NSLayoutConstraint.activate([
-            pokemonCollectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            pokemonCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Layout.collectionSpacing),
-            pokemonCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            pokemonCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Layout.collectionSpacing)
-        ])
+        pokemonCollectionView
+            .make([.top, .bottom], equalTo: self)
+            .make(.leading, equalTo: self, constant: Layout.collectionSpacing)
+            .make(.trailing, equalTo: self, constant: -Layout.collectionSpacing)
     }
 
     func additionalConfigurations() {

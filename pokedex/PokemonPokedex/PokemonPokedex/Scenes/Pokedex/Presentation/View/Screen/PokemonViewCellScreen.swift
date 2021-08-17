@@ -67,33 +67,21 @@ extension PokemonViewCellScreen: ViewConfiguration {
     }
 
     func addConstraints() {
-        NSLayoutConstraint.activate([
-            backgroundSubview.topAnchor.constraint(equalTo: topAnchor),
-            backgroundSubview.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backgroundSubview.bottomAnchor.constraint(equalTo: bottomAnchor),
-            backgroundSubview.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+        backgroundSubview
+            .make([.top, .bottom, .leading, .trailing], equalTo: self)
 
-        NSLayoutConstraint.activate([
-            pokemonNumberLabel.heightAnchor.constraint(equalToConstant: 20),
-            pokemonNumberLabel.leadingAnchor.constraint(equalTo: self.backgroundSubview.leadingAnchor),
-            pokemonNumberLabel.bottomAnchor.constraint(equalTo: self.backgroundSubview.bottomAnchor),
-            pokemonNumberLabel.trailingAnchor.constraint(equalTo: self.backgroundSubview.trailingAnchor)
-        ])
+        pokemonNumberLabel
+            .make(.height, equalTo: 20)
+            .make([.leading, .bottom, .trailing], equalTo: backgroundSubview)
 
-        NSLayoutConstraint.activate([
-            pokemonNameLabel.heightAnchor.constraint(equalToConstant: 16),
-            pokemonNameLabel.leadingAnchor.constraint(equalTo: self.backgroundSubview.leadingAnchor),
-            pokemonNameLabel.bottomAnchor.constraint(equalTo: self.pokemonNumberLabel.topAnchor),
-            pokemonNameLabel.trailingAnchor.constraint(equalTo: self.backgroundSubview.trailingAnchor)
-        ])
+        pokemonNameLabel
+            .make([.leading, .trailing], equalTo: backgroundSubview)
+            .make(.bottom, equalTo: pokemonNumberLabel, attribute: .top)
+            .make(.height, equalTo: 16)
 
-        NSLayoutConstraint.activate([
-            pokemonImage.topAnchor.constraint(equalTo: self.backgroundSubview.topAnchor),
-            pokemonImage.leadingAnchor.constraint(equalTo: self.backgroundSubview.leadingAnchor),
-            pokemonImage.bottomAnchor.constraint(equalTo: self.pokemonNameLabel.topAnchor),
-            pokemonImage.trailingAnchor.constraint(equalTo: self.backgroundSubview.trailingAnchor)
-        ])
+        pokemonImage
+            .make([.top, .leading, .trailing], equalTo: backgroundSubview)
+            .make(.bottom, equalTo: pokemonNameLabel, attribute: .top)
     }
 }
 

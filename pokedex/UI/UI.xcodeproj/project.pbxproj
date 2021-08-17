@@ -13,6 +13,7 @@
 		B135D16B269CDB1900A8E5D8 /* UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B135D16A269CDB1900A8E5D8 /* UITests.swift */; };
 		B135D16D269CDB1900A8E5D8 /* UI.h in Headers */ = {isa = PBXBuildFile; fileRef = B135D15F269CDB1900A8E5D8 /* UI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B172D9D6269CDBD400ED92A4 /* ViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B172D9D5269CDBD400ED92A4 /* ViewConfiguration.swift */; };
+		B1CA8F3B26BC682600B04EEB /* UIView+LayoutExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1CA8F3A26BC682600B04EEB /* UIView+LayoutExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		B135D16A269CDB1900A8E5D8 /* UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITests.swift; sourceTree = "<group>"; };
 		B135D16C269CDB1900A8E5D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B172D9D5269CDBD400ED92A4 /* ViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfiguration.swift; sourceTree = "<group>"; };
+		B1CA8F3A26BC682600B04EEB /* UIView+LayoutExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+LayoutExtension.swift"; sourceTree = "<group>"; };
 		BE0E52C7F027E6EC058D4218 /* Pods-UI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.debug.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.debug.xcconfig"; sourceTree = "<group>"; };
 		E04EF954A48DE02193EEB6FF /* Pods-UI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI.release.xcconfig"; path = "Target Support Files/Pods-UI/Pods-UI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 		B135D15E269CDB1900A8E5D8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				B1CA8F3926BC67B200B04EEB /* AutoLayoutWrapper */,
 				B172D9D4269CDBC000ED92A4 /* Protocols */,
 				B135D15F269CDB1900A8E5D8 /* UI.h */,
 				B135D160269CDB1900A8E5D8 /* Info.plist */,
@@ -128,6 +131,14 @@
 				B172D9D5269CDBD400ED92A4 /* ViewConfiguration.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B1CA8F3926BC67B200B04EEB /* AutoLayoutWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				B1CA8F3A26BC682600B04EEB /* UIView+LayoutExtension.swift */,
+			);
+			path = AutoLayoutWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1CA8F3B26BC682600B04EEB /* UIView+LayoutExtension.swift in Sources */,
 				B172D9D6269CDBD400ED92A4 /* ViewConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
