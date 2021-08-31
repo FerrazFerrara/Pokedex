@@ -59,16 +59,6 @@ final class PokedexViewModelTests: XCTestCase {
         }
     }
 
-    func testCalculateItemSize_WhenReceiveViewSize_ShouldReturnItemSize() {
-        let viewSize: Float = 99
-        let itensSpacing: Float = 10
-        let itemSize = (viewSize / 3) - (itensSpacing * 2)
-
-        let result = sut.calculateItemSize(viewSize: viewSize, itensSpacing: itensSpacing)
-
-        XCTAssertEqual(itemSize, result)
-    }
-
     func testNumberOfItemsInSection_WhenHasPokemons_ShouldReturnCountOfPokemons() {
         useCase.setPokemonList(pokemons: PokemonEntityDumb.list())
         sut.getPokemons { [weak self] _ in
