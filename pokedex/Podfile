@@ -66,10 +66,18 @@ target 'PokemonPokedex' do
   # use_frameworks!
 
   # Pods for PokemonPokedex
+  # pod 'SnapshotTesting', '~> 1.9.0'
 
   target 'PokemonPokedexTests' do
     inherit! :search_paths
     # Pods for testing
+    # pod 'SnapshotTesting', '~> 1.9.0'
+  end
+
+  target 'PokemonPokedexUITests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod 'SnapshotTesting', '~> 1.9.0'
   end
 
 end
